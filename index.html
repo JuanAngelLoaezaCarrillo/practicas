@@ -1,30 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title> Suma y fraccion</title>
-    <style>
-        .resultado {
-            width: 33.33%;
-            float: left;
-            padding: 10px;
-            box-sizing: border-box;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de torneo</title>
 </head>
 <body>
-    <h2> Suma y fraccion</h2>
-    <label for="potencia">Ingrese la potencia:</label>
-    <input type="number" id="potencia" name="potencia">
-    <button onclick="calcular()">Calcular</button>
-    <h3>Resultado en suma:</h3>
-    <p id="resultadoSuma"></p>
-    <h3>Resultado en fraccion:</h3>
-    <p id="resultadoFraccion"></p>
-   
-    <script src="java.js"></script>
+    <div id="container"></div>
+
+    <script>
+        // 8 Equipos
+        const equipos = ['Argentina', 'Holanda', 'Croacia', 'Brasil', 'Marruecos', 'Portugal', 'Francia', 'Inglaterra'];
+
+        // Ronda de 16
+        const cuartos = [
+            {equipo1: 'Argentina', equipo2: 'Holanda', ganador: 'Argentina'},
+            {equipo1: 'Croacia', equipo2: 'Brasil', ganador: 'Croacia'},
+            {equipo1: 'Marruecos', equipo2: 'Portugal', ganador: 'Marruecos'},
+            {equipo1: 'Francia', equipo2: 'Inglaterra', ganador: 'Francia'}
+        ];
+
+        // Semifinales
+        const semifinales = [
+            {equipo1: 'Argentina', equipo2: 'Croacia', ganador: 'Argentina'},
+            {equipo1: 'Marruecos', equipo2: 'Francia', ganador: 'Francia'}
+        ];
+
+        // Final
+        const final = [
+            {equipo1: 'Argentina', equipo2: 'Francia', ganador: 'Francia'}
+        ];
+
+        function mostrarResultado(titulo, equipos) {
+            let resultado = document.createElement('div');
+            resultado.innerHTML = `<h2>${titulo}</h2>`;
+            equipos.forEach(partido => {
+                resultado.innerHTML += `<p>${partido.equipo1} - ${partido.equipo2}: ${partido.ganador}</p>`;
+            });
+            return resultado;
+        }
+
+        const container = document.getElementById('container');
+
+        // Cuartos de final
+        container.appendChild(mostrarResultado('Cuartos de final', cuartos));
+
+        // Semifinales
+        container.appendChild(mostrarResultado('Semifinales', semifinales));
+
+        // Final
+        container.appendChild(mostrarResultado('Final', final));
+
+        // Campeon
+        let campeon = final[0].ganador;
+        let resultadoCampeon = document.createElement('div');
+        resultadoCampeon.innerHTML = `<h2>El campeon es: ${campeon}</h2>`;
+        container.appendChild(resultadoCampeon);
+    </script>
 </body>
 </html>
-
-
-
-

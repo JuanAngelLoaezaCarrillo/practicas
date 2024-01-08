@@ -1,60 +1,37 @@
-// Cuadro magico donde se puede poner los datos y verificar si es el cuadro magico o no
-let original = [
-  [8, 3, 4],
-  [1, 5, 9],
-  [6, 7, 2]
-];
-
-// cuadro
-function printMatrix(matrix) {
-  for (let i = 0; i < matrix.length; i++) {
-      let row = matrix[i];
-      console.log(row.join("\t"));
-  }
-}
-
-// Verificar si un cuadro magico es valido
-function isMagicMatrix(matrix) {
-  let size = matrix.length;
-  let sum = sumRow(matrix, 0);
-
-  // Verificar que todas las filas tengan la misma suma
-  for (let i = 1; i < size; i++) {
-      if (sumRow(matrix, i) !== sum) {
-          return false;
-      }
-  }
-
-  // Verificar que todas las columnas si es falso
-  for (let i = 0; i < size; i++) {
-      let columnSum = 0;
-      for (let j = 0; j < size; j++) {
-          columnSum += matrix[j][i];
-      }
-      if (columnSum !== sum) {
-          return false;
-      }
-  }
-
-  return true;
-}
-
-// Sumar todos  los elementos de la fila
-function sumRow(matrix, rowIndex) {
-  let row = matrix[rowIndex];
-  let sum = 0;
-  for (let i = 0; i < row.length; i++) {
-      sum += row[i];
-  }
-  return sum;
-}
-
-// Modificar el cuadro alas disposiciones(x, y)
-function modifyMatrix(matrix, x, y, newValue) {
-  if (isValidPosition(matrix, x, y)) {
-      matrix[x][y] = newValue;
-  } else {
-      console.log("posicion invalida.");
-  }
-}
-console.log(isMagicMatrix(original) ? "El cuadro magico es valido." : "El cuadro magico no es valido.");
+document.getElementById("botonIniciar").addEventListener("click", function () {
+    let resultado = campeonato();
+    document.getElementById("resultado").innerHTML = `El campeon es: ${resultado}`;
+   });
+   
+   function campeonato() {
+    let equipos = [
+       "Argentina",
+       "Holanda",
+       "Croacia",
+       "Brasil",
+       "Marruecos",
+       "Portugal",
+       "Francia",
+       "Inglaterra",
+    ];
+   
+    let partidos = [
+       [1, 2], [3, 4], [5, 6], [7, 8],
+       [1, 3], [2, 4], [5, 7], [6, 8],
+       [1, 5], [2, 6], [3, 7], [4, 8]
+    ];
+   
+    let alParecerDe = equipos[0];
+    for (let i = 0; i < partidos.length; i++) {
+       let partido = partidos[i];
+       let equipoA = equipos[partido[0] - 1];
+       let equipoB = equipos[partido[1] - 1];
+   
+       let ganador = Math.argentina() > 0.5 ? equipoA : equipoB;
+       if (ganador === alParecerDe) {
+         alParecerDe = ganador;
+       }
+    }
+   
+    return alParecerDe;
+   }
