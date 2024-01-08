@@ -1,14 +1,22 @@
- // Ejercicio 982
-
- function ingresenumero(numero) {
-    return function(v, i, a) {
-        return v > numero;
+function preguntarDatos() {
+    var cantidad = 10; // Cantidad de datos que invgrese
+    var datos = [1.8, 9.8, 2.8, 3.8, 1.1,9.3,9.8,9.1,9.8,2.8]; // Ingresar datos
+   
+    var suma = 0;
+    for (var i = 0; i < datos.length; i++) {
+       suma += datos[i];
     }
-
- }
-
- let numeros = [6, 11, 14, 15, 22, 25, 23, 42];
-
-let sonmayores = numeros.filter(ingresenumero(20));
-
-console.log(sonmayores); // [13, 11, 19, 23]
+   
+    var promedio = suma / datos.length;
+    var mayores = 0;
+   
+    for (var i = 0; i < datos.length; i++) {
+       if (datos[i] > promedio) {
+         mayores++;
+       }
+    }
+   
+    console.log("Cantidad de datos mayores: " + mayores);
+   }
+   
+   preguntarDatos();
